@@ -8,6 +8,8 @@ import javax.swing.text.StyledEditorKit.ForegroundAction;
 public class WebTree {
 	public WebNode root;
 	
+	public static Result result;
+	
 	public WebTree(WebPage rootPage){
 		this.root = new WebNode(rootPage);
 	}
@@ -39,6 +41,11 @@ public class WebTree {
 		System.out.print("(");
 		//print "name","score"
 		System.out.print(startNode.webPage.name+","+startNode.nodeScore);
+		
+		// add node score to Result class in order to sort the scores
+		this.result = new Result(startNode.webPage.name,startNode.nodeScore); 
+		
+		
 		
 		//2.print child preorder
 		for(WebNode child : startNode.children){

@@ -43,15 +43,17 @@ public class GoogleQuery
 	public String citeUrl2;
 	public String title2;
 	
+	public KeywordList k;
 //	public PriorityQueue<WebNode> heap;
 
 	public GoogleQuery(String searchKeyword) throws UnsupportedEncodingException
 
 	{
+		k = new KeywordList();
 		// 對中文字進行解碼 encode for chinese charcters
 		String message = java.net.URLEncoder.encode(searchKeyword,"utf-8");
 		this.searchKeyword = message;
-		this.url = "http://www.google.com/search?q=" + this.searchKeyword + "&oe=utf8&num=20";
+		this.url = "http://www.google.com/search?q=" + this.searchKeyword + "&oe=utf8&num=30";
 
 	}
 
@@ -84,7 +86,7 @@ public class GoogleQuery
 		return retVal;
 	}
 
-	public HashMap<String, String> query() throws IOException,MalformedURLException
+	public HashMap<String, String> query() throws IOException,MalformedURLException,FileNotFoundException
 
 	{
 
@@ -109,15 +111,17 @@ public class GoogleQuery
 			try
 
 			{
-				 citeUrl2 = li.select("a").get(0).attr("href");
-				 title2 = li.select("a").get(0).select(".vvjwJb").text();
+				  citeUrl2 = li.select("a").get(0).attr("href").substring(7);
+				  title2 = li.select("a").get(0).select(".vvjwJb").text();
 				if (title2.equals("")) {
 					continue;
 				}
-
+				
+				
 				WebPage rootPage = new WebPage(citeUrl2,title2);		
 				WebTree tree = new WebTree(rootPage);
-
+				
+				// fill in absolute path
 				File file = new File("C:/Users/User/git/DS_FinalProject/Web/input.txt");
 				Scanner scanner = new Scanner(file);
 				
@@ -145,12 +149,9 @@ public class GoogleQuery
 			
 					tree.setPostOrderScore(keywords);
 					tree.eularPrintTree();	
-//					tree2.setPostOrderScore(keywords);
-//					tree2.eularPrintTree();
-//					tree3.setPostOrderScore(keywords);
-//					tree3.eularPrintTree();
-//					tree4.setPostOrderScore(keywords);
-//					tree4.eularPrintTree();
+					
+					k.getList().add(WebTree.result);
+					System.out.println(k.getList().toString());
 
 				}
 				scanner.close();
@@ -161,9 +162,18 @@ public class GoogleQuery
 				retVal.put(title2, citeUrl2); // key, value
 
 			} catch (IndexOutOfBoundsException e) {
-				e.printStackTrace();
+//		e.printStackTrace();
 			} 
-			catch (MalformedURLException e) {
+//			catch (MalformedURLException e) {
+//				e.printStackTrace();
+//				continue;
+//			}
+			catch (FileNotFoundException e) {
+//				e.printStackTrace();
+//				continue;
+			}
+			catch (IOException e) {
+				
 			}
 			
 			
@@ -171,20 +181,22 @@ public class GoogleQuery
 //			 title2 = li.select("a").get(0).select(".vvjwJb").text();
 
 		}
-
+		k.sort();
+		k.output();
 		return retVal;
 
 	}
+
 	
-	static {
-		HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() 
-		{
-			public boolean verify(String hostname,SSLSession session) 
-			{
-				return true;
-			}
-		});
-	}
+//	static {
+//		HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() 
+//		{
+//			public boolean verify(String hostname,SSLSession session) 
+//			{
+//				return true;
+//			}
+//		});
+//	}
 }
 	
 	
