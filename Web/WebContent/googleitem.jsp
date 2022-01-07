@@ -41,9 +41,9 @@ text-decoration:underline;
 	<div style='position: absolute;margin-top:10px;margin-left:50px'>
 		<%
 		String[][] orderList = (String[][]) request.getAttribute("query");
-		for (int i = 0; i < orderList.length; i++) {
+		for (int i = 5; i < orderList.length; i++) {
 			String s=orderList[i][1]; // [0][1], [1][1] 
-			s=s.substring(7);
+			 //start from 8
 		%>
 		
 		<a href='<%=s%>'><%=orderList[i][0]%> </a> <br>-----------------------------------------------<br>

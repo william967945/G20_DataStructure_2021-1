@@ -12,6 +12,7 @@ import java.net.URL;
 
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.PriorityQueue;
 import java.util.Properties;
@@ -40,7 +41,7 @@ public class GoogleQuery
 	public String content;
 	
 	//
-	public String citeUrl2;
+	public static String citeUrl2;
 	public String title2;
 	
 	public KeywordList k;
@@ -151,15 +152,15 @@ public class GoogleQuery
 					tree.eularPrintTree();	
 					
 					k.getList().add(WebTree.result);
-					System.out.println(k.getList().toString());
+					//System.out.println(k.getList().toString());
 
 				}
 				scanner.close();
 				
-				System.out.println(title2 + "," + citeUrl2);
+				System.out.println(citeUrl2);
 				System.out.println("-----------------------------");
 				
-				retVal.put(title2, citeUrl2); // key, value
+				//retVal.put(title2, citeUrl2); // key, value
 
 			} catch (IndexOutOfBoundsException e) {
 //		e.printStackTrace();
@@ -182,7 +183,12 @@ public class GoogleQuery
 
 		}
 		k.sort();
+		Collections.reverse(k.lst);
 		k.output();
+		for(Result result:k.lst) {
+			retVal.put(result.name, result.url);
+
+		}
 		return retVal;
 
 	}

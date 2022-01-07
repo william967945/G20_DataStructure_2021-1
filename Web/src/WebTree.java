@@ -40,10 +40,11 @@ public class WebTree {
 		//print "("
 		System.out.print("(");
 		//print "name","score"
-		System.out.print(startNode.webPage.name+","+startNode.nodeScore);
+		System.out.print(startNode.nodeScore+","+startNode.webPage.name);
 		
 		// add node score to Result class in order to sort the scores
-		this.result = new Result(startNode.webPage.name,startNode.nodeScore); 
+		
+		WebTree.result = new Result(startNode.webPage.name,startNode.nodeScore, GoogleQuery.citeUrl2); 
 		
 		
 		
