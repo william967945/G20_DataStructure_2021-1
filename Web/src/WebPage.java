@@ -1,5 +1,6 @@
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 public class WebPage {
@@ -8,8 +9,9 @@ public class WebPage {
 	public WordCounter counter;
 	public double score;
 	
-	public WebPage(String url,String name){
+	public WebPage(String url,String name) throws UnsupportedEncodingException{
 		this.url = url;
+		//String name2 = new String(name.getBytes("GBK"),"UTF-8");
 		this.name = name;
 		this.counter = new WordCounter(url);	
 	}

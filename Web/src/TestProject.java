@@ -1,7 +1,10 @@
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map.Entry;
+import java.util.Properties;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -16,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/TestProject")
 public class TestProject extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -43,6 +47,12 @@ public class TestProject extends HttpServlet {
 		}
 		
 		//
+//		ClassLoader cl = GoogleQuery.class.getClassLoader();
+//		File file = new File(cl.getResource("/input.txt").getFile());
+		//this.is = getServletContext().getResourceAsStream("/WEB-INF/input.txt");
+		//properties.load(getServletContext().getResourceAsStream("/input.txt.properties"));
+		
+		
 		GoogleQuery google = new GoogleQuery(request.getParameter("keyword"));
 		HashMap<String, String> query = google.query();
 		
