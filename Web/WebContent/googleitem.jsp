@@ -40,12 +40,13 @@ text-decoration:underline;
 	  <div style='position: absolute;background-color:#EFEEEE ;margin-top:150px;margin-left:250px;width:400px;height:350px;overflow:scroll'>
 	<div style='position: absolute;margin-top:10px;margin-left:50px'>
 		<%
+	
 		String[][] orderList = (String[][]) request.getAttribute("query");
-		for (int i = 5; i < orderList.length; i++) {
+		for (int i = 0; i < orderList.length; i++) {
 			String s=orderList[i][1]; // [0][1], [1][1] 
 			 //start from 8
 		%>
-		
+		<p><%System.out.println(orderList[i][0]); %></p>
 		<a href='<%=s%>'><%=orderList[i][0]%> </a> <br>-----------------------------------------------<br>
 		
 		<%

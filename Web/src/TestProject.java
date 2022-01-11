@@ -57,8 +57,12 @@ public class TestProject extends HttpServlet {
 		HashMap<String, String> query = google.query();
 		
 		
-		
 		String[][] s = new String[query.size()][2];
+		
+		
+		
+		
+		
 		request.setAttribute("query", s);
 		int num = 0;
 		for(Entry<String, String> entry : query.entrySet()) { // the results goes in the entry
@@ -68,7 +72,11 @@ public class TestProject extends HttpServlet {
 		    s[num][1] = value;//url
 		    num++;
 		}
-		
+		KeywordList a=google.k;
+		for(int i=0;i<a.lst.size();i++) {
+			 s[i][0] = a.lst.get(i).name;//title
+			 s[i][1] = a.lst.get(i).url;//url
+		}
 		request.getRequestDispatcher("googleitem.jsp")
 		 .forward(request, response); 
 		

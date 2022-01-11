@@ -44,7 +44,7 @@ public class GoogleQuery
 	public static String citeUrl2;
 	public String title2;
 	
-	public KeywordList k;
+	public static KeywordList k;
 //	public PriorityQueue<WebNode> heap;
 
 	public GoogleQuery(String searchKeyword) throws UnsupportedEncodingException
@@ -54,7 +54,7 @@ public class GoogleQuery
 		// 對中文字進行解碼 encode for chinese charcters
 		String message = java.net.URLEncoder.encode(searchKeyword,"utf-8");
 		this.searchKeyword = message;
-		this.url = "http://www.google.com/search?q=" + this.searchKeyword + "&oe=utf8&num=30";
+		this.url = "http://www.google.com/search?q=" + this.searchKeyword + "&oe=utf8&num=50";
 
 	}
 
@@ -190,19 +190,18 @@ public class GoogleQuery
 
 		}
 		return retVal;
-
 	}
 
 	
-//	static {
-//		HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() 
-//		{
-//			public boolean verify(String hostname,SSLSession session) 
-//			{
-//				return true;
-//			}
-//		});
-//	}
+	static {
+		HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() 
+		{
+			public boolean verify(String hostname,SSLSession session) 
+			{
+				return true;
+			}
+		});
+	}
 }
 	
 	
