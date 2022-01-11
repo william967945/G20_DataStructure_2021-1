@@ -64,9 +64,18 @@ public class KeywordList {
 	
 	
 	private void swap(int aIndex, int bIndex){
-		Result temp = lst.get(aIndex);
-		lst.set(aIndex, lst.get(bIndex));
-		lst.set(bIndex, temp);
+		// change the posititions of s[][] 
+		
+		// t = a
+		// a = b
+		// b = t
+		
+		
+		
+		
+//		Result temp = lst.get(aIndex);
+//		lst.set(aIndex, lst.get(bIndex));
+//		lst.set(bIndex, temp);
 	}
 	
 	public void output(){
