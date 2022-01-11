@@ -53,15 +53,11 @@ public class TestProject extends HttpServlet {
 		//properties.load(getServletContext().getResourceAsStream("/input.txt.properties"));
 		
 		
-		GoogleQuery google = new GoogleQuery(request.getParameter("keyword"));
+		GoogleQuery google = new GoogleQuery(request.getParameter("keyword")+"¥x¥_©@°ØÆU");
 		HashMap<String, String> query = google.query();
 		
 		
 		String[][] s = new String[query.size()][2];
-		
-		
-		
-		
 		
 		request.setAttribute("query", s);
 		int num = 0;
@@ -72,7 +68,7 @@ public class TestProject extends HttpServlet {
 		    s[num][1] = value;//url
 		    num++;
 		}
-		KeywordList a=google.k;
+		KeywordList a = google.k;
 		for(int i=0;i<a.lst.size();i++) {
 			 s[i][0] = a.lst.get(i).name;//title
 			 s[i][1] = a.lst.get(i).url;//url

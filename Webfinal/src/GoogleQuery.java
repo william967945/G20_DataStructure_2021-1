@@ -123,7 +123,7 @@ public class GoogleQuery
 				WebTree tree = new WebTree(rootPage);
 				
 				// fill in absolute path
-				File file = new File("C:/Users/User/git/DS_FinalProject/Web/input.txt");
+				File file = new File("C:/Users/User/git/DS_FinalProject/Webfinal/input.txt");
 				Scanner scanner = new Scanner(file);
 				
 				

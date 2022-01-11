@@ -73,9 +73,9 @@ public class KeywordList {
 		
 		
 		
-//		Result temp = lst.get(aIndex);
-//		lst.set(aIndex, lst.get(bIndex));
-//		lst.set(bIndex, temp);
+		Result temp = lst.get(aIndex);
+		lst.set(aIndex, lst.get(bIndex));
+		lst.set(bIndex, temp);
 	}
 	
 	public void output(){
