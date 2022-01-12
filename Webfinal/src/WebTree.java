@@ -43,7 +43,6 @@ public class WebTree {
 		System.out.print(startNode.nodeScore+","+startNode.webPage.name);
 		
 		// add node score to Result class in order to sort the scores
-		
 		WebTree.result = new Result(startNode.webPage.name,startNode.nodeScore, GoogleQuery.citeUrl2); 
 		
 		

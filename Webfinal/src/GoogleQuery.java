@@ -44,13 +44,13 @@ public class GoogleQuery
 	public static String citeUrl2;
 	public String title2;
 	
-	public static KeywordList k;
+	public static KeywordList finalSort;
 //	public PriorityQueue<WebNode> heap;
 
 	public GoogleQuery(String searchKeyword) throws UnsupportedEncodingException
 
 	{
-		k = new KeywordList();
+		finalSort = new KeywordList();
 		// 對中文字進行解碼 encode for chinese charcters
 		String message = java.net.URLEncoder.encode(searchKeyword,"utf-8");
 		this.searchKeyword = message;
@@ -125,13 +125,12 @@ public class GoogleQuery
 				// fill in absolute path
 				File file = new File("C:/Users/User/git/DS_FinalProject/Webfinal/input.txt");
 				Scanner scanner = new Scanner(file);
-				
-				
 				//read 2 Yu 1.2 Fang 1.8 
 				//Scanner scanner = new Scanner(System.in);
-				
 				while(scanner.hasNextLine()){
 					int numOfKeywords = scanner.nextInt();//2
+					
+					// instantiate an arrayList to store Keyword objects(name, weight) scanned from input.txt.
 					ArrayList<Keyword> keywords = new ArrayList<Keyword>();
 					
 					for(int i =0;i<numOfKeywords;i++)
@@ -151,7 +150,9 @@ public class GoogleQuery
 					tree.setPostOrderScore(keywords);
 					tree.eularPrintTree();	
 					
-					k.getList().add(WebTree.result);
+					// call arrayList from KeywordList class  
+					// to store the Result objects(name, nodeScore, URL)
+					finalSort.getList().add(WebTree.result);
 					//System.out.println(k.getList().toString());
 
 				}
@@ -163,15 +164,8 @@ public class GoogleQuery
 				//retVal.put(title2, citeUrl2); // key, value
 
 			} catch (IndexOutOfBoundsException e) {
-//		e.printStackTrace();
 			} 
-//			catch (MalformedURLException e) {
-//				e.printStackTrace();
-//				continue;
-//			}
 			catch (FileNotFoundException e) {
-//				e.printStackTrace();
-//				continue;
 			}
 			catch (IOException e) {
 				
@@ -182,12 +176,12 @@ public class GoogleQuery
 //			 title2 = li.select("a").get(0).select(".vvjwJb").text();
 
 		}
-		k.sort();
-		Collections.reverse(k.lst);
-		k.output();
-		for(Result result:k.lst) {
+		finalSort.sort();
+		Collections.reverse(finalSort.lst);
+		finalSort.output();
+	
+		for(Result result:finalSort.lst) {
 			retVal.put(result.name, result.url);
-
 		}
 		return retVal;
 	}

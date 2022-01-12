@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Properties;
@@ -15,6 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Servlet implementation class TestProject
+ */
+/**
+ * The input.txt absolute path in GoogleQuery Class varies from different computers. 
  */
 @WebServlet("/TestProject")
 public class TestProject extends HttpServlet {
@@ -45,30 +49,23 @@ public class TestProject extends HttpServlet {
 			request.getRequestDispatcher("Search.jsp").forward(request, response);
 			return;
 		}
-		
-		//
-//		ClassLoader cl = GoogleQuery.class.getClassLoader();
-//		File file = new File(cl.getResource("/input.txt").getFile());
-		//this.is = getServletContext().getResourceAsStream("/WEB-INF/input.txt");
-		//properties.load(getServletContext().getResourceAsStream("/input.txt.properties"));
-		
-		
+
 		GoogleQuery google = new GoogleQuery(request.getParameter("keyword")+"¥x¥_©@°ØÆU");
 		HashMap<String, String> query = google.query();
-		
 		
 		String[][] s = new String[query.size()][2];
 		
 		request.setAttribute("query", s);
 		int num = 0;
-		for(Entry<String, String> entry : query.entrySet()) { // the results goes in the entry
+		for(Entry<String, String> entry : query.entrySet()) { 
 		    String key = entry.getKey();
 		    String value = entry.getValue();
 		    s[num][0] = key;//title
 		    s[num][1] = value;//url
 		    num++;
 		}
-		KeywordList a = google.k;
+		// convert the KeywordList to double arrayList
+		KeywordList a = GoogleQuery.finalSort;
 		for(int i=0;i<a.lst.size();i++) {
 			 s[i][0] = a.lst.get(i).name;//title
 			 s[i][1] = a.lst.get(i).url;//url
